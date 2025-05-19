@@ -1,2 +1,2 @@
 # Raytracing
-A step up fron raycasting that I also made earlier
+A step up from raycasting that I also made earlier
