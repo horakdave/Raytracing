@@ -1,3 +1,6 @@
+# https://www.edmundoptics.com/knowledge-center/application-notes/optics/geometrical-optics-101-paraxial-ray-tracing-calculations/?srsltid=AfmBOorFJE1nMmqNXSdI4kj-daEtLxGTXdOFenDmnNTKRLl_rNrmq0f9
+# https://funprogramming.org/140-Recursive-graphics.html#:~:text=Using%20recursion%20in%20computer%20programs,the%20function%20can%20call%20itself.
+
 import pygame
 import math
 from dataclasses import dataclass
@@ -166,12 +169,25 @@ def main():
     # Camera setup
     camera_pos = Vec3(0, 0, 0)
     fov = math.pi / 2
+    camera_speed = 0.1
 
+    clock = pygame.time.Clock()
     running = True
     while running:
+        # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_w:
+                    camera_pos.y += camera_speed
+                    print(f"Camera moved up to y={camera_pos.y}")
+                elif event.key == pygame.K_s:
+                    camera_pos.y -= camera_speed
+                    print(f"Camera moved down to y={camera_pos.y}")
+
+        # Clear the screen
+        screen.fill((0, 0, 0))
 
         # Render the scene
         for y in range(height):
@@ -189,6 +205,7 @@ def main():
                 screen.set_at((x, y), color)
 
         pygame.display.flip()
+        clock.tick(60)  # Limit to 60 FPS
 
     pygame.quit()
 
