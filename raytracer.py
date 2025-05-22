@@ -141,7 +141,9 @@ class Scene:
             reflect_dist = reflect_dir.length()
             if reflect_dist > 1e-6:  # Only reflect if direction is valid
                 reflect_dir = reflect_dir * (1.0 / reflect_dist)  # Normalize manually
-                reflect_ray = Ray(hit_point, reflect_dir)
+                # Add a small offset to the reflection ray origin to prevent self-intersection
+                offset_point = hit_point + normal * 1e-4
+                reflect_ray = Ray(offset_point, reflect_dir)
                 reflect_color = self.trace_ray(reflect_ray, depth + 1)
                 color = [int(c * (1 - closest_sphere.specular) + rc * closest_sphere.specular)
                         for c, rc in zip(color, reflect_color)]
