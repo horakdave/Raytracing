@@ -187,6 +187,12 @@ def main():
                 elif event.key == pygame.K_s:
                     camera_pos.y -= camera_speed
                     print(f"Camera moved down to y={camera_pos.y}")
+                elif event.key == pygame.K_a:
+                    camera_pos.x -= camera_speed
+                    print(f"Camera moved left to x={camera_pos.x}")
+                elif event.key == pygame.K_d:
+                    camera_pos.x += camera_speed
+                    print(f"Camera moved right to x={camera_pos.x}")
 
         # Clear the screen
         screen.fill((0, 0, 0))
