@@ -170,8 +170,10 @@ def main():
 
     # Camera setup
     camera_pos = Vec3(0, 0, 0)
+    camera_rotation = 0.0  # Rotation angle in radians
     fov = math.pi / 2
     camera_speed = 0.1
+    rotation_speed = 0.1  # Radians per keypress
 
     clock = pygame.time.Clock()
     running = True
@@ -193,6 +195,12 @@ def main():
                 elif event.key == pygame.K_d:
                     camera_pos.x += camera_speed
                     print(f"Camera moved right to x={camera_pos.x}")
+                elif event.key == pygame.K_q:
+                    camera_rotation += rotation_speed
+                    print(f"Camera rotated left to {math.degrees(camera_rotation)}°")
+                elif event.key == pygame.K_e:
+                    camera_rotation -= rotation_speed
+                    print(f"Camera rotated right to {math.degrees(camera_rotation)}°")
 
         # Clear the screen
         screen.fill((0, 0, 0))
@@ -204,8 +212,14 @@ def main():
                 ndc_x = (2 * ((x + 0.5) / width) - 1) * math.tan(fov / 2) * (width / height)
                 ndc_y = (1 - 2 * ((y + 0.5) / height)) * math.tan(fov / 2)
 
-                # Create ray from camera through pixel
-                ray_dir = Vec3(ndc_x, ndc_y, -1).normalize()
+                # Create ray from camera through pixel with rotation
+                ray_dir = Vec3(ndc_x, ndc_y, -1)
+                # Apply rotation around Y axis
+                cos_rot = math.cos(camera_rotation)
+                sin_rot = math.sin(camera_rotation)
+                rotated_x = ray_dir.x * cos_rot + ray_dir.z * sin_rot
+                rotated_z = -ray_dir.x * sin_rot + ray_dir.z * cos_rot
+                ray_dir = Vec3(rotated_x, ray_dir.y, rotated_z).normalize()
                 ray = Ray(camera_pos, ray_dir)
 
                 # Trace ray and get color
