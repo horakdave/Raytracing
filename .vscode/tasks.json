@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake Configure",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/cpp && mkdir -p build && cd build && cmake ..",
+            "group": "build"
+        },
+        {
+            "label": "CMake Build",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/cpp/build && make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": ["CMake Configure"]
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "${workspaceFolder}/cpp/build/raytracer",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "dependsOn": ["CMake Build"]
+        }
+    ]
+} 

@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/david-h/Documents/Github/Raytracing-1/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/raytracer.dir/main.cpp.o -c /home/david-h/Documents/Github/Raytracing-1/cpp/main.cpp",
+  "file": "/home/david-h/Documents/Github/Raytracing-1/cpp/main.cpp",
+  "output": "CMakeFiles/raytracer.dir/main.cpp.o"
+},
+{
+  "directory": "/home/david-h/Documents/Github/Raytracing-1/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -o CMakeFiles/raytracer.dir/scene.cpp.o -c /home/david-h/Documents/Github/Raytracing-1/cpp/scene.cpp",
+  "file": "/home/david-h/Documents/Github/Raytracing-1/cpp/scene.cpp",
+  "output": "CMakeFiles/raytracer.dir/scene.cpp.o"
+}
+]
